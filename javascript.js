@@ -1,15 +1,36 @@
-//core functionality lifted from https://www.w3schools.com/howto/howto_js_accordion.asp
+/*
+ *   VIA https://www.w3.org/WAI/ARIA/apg/patterns/accordion/examples/accordion/
+ *   This content is licensed according to the W3C Software License at
+ *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+ *
+ *   Simple accordion pattern example
+ */
 
-const question = document.querySelectorAll("h2");
+const accordion = document.querySelector(".accordion");
 
-for (i = 0; i < question.length; i++) {
-    question[i].addEventListener("click", function () {
-        this.classList.toggle("open");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    });
+accordion.addEventListener("click", (e) => {
+	const activePanel = e.target.closest(".faq-item");
+	if (!activePanel) {
+		return;
+	}
+	toggleAccordion(activePanel);
+});
+
+function toggleAccordion(panelToActivate) {
+	const buttons = panelToActivate.parentElement.querySelectorAll("button");
+	const contents =
+		panelToActivate.parentElement.querySelectorAll(".accordion-panel");
+
+	buttons.forEach((button) => {
+		button.setAttribute("aria-expanded", false);
+	});
+
+	contents.forEach((content) => {
+		content.setAttribute("aria-hidden", true);
+	});
+
+	panelToActivate.querySelector("button").setAttribute("aria-expanded", true);
+	panelToActivate
+		.querySelector(".accordion-panel")
+		.setAttribute("aria-hidden", false);
 }

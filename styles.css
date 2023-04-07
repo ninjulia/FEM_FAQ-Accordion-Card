@@ -1,193 +1,279 @@
 :root {
+	--desaturated-blue: hsl(238, 29%, 16%);
+	--soft-red: hsl(14, 88%, 65%);
 
-    --desaturated-blue: hsl(238, 29%, 16%);
-    --soft-red: hsl(14, 88%, 65%);
+	/* Background gradient: */
 
-    /* Background gradient: */
+	--soft-violet: hsl(273, 75%, 66%);
+	--soft-blue: hsl(240, 73%, 65%);
 
-    --soft-violet: hsl(273, 75%, 66%);
-    --soft-blue: hsl(240, 73%, 65%);
+	/* Text */
 
-    /* Text */
+	--very-dark-grayish-blue: hsl(237, 12%, 33%);
+	--dark-grayish-blue: hsl(240, 6%, 50%);
 
-    --very-dark-grayish-blue: hsl(237, 12%, 33%);
-    --dark-grayish-blue: hsl(240, 6%, 50%);
-
-    /* Divider */
-    --light-grayish-blue: hsl(240, 5%, 91%);
-
+	/* Divider */
+	--light-grayish-blue: hsl(240, 5%, 91%);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
 }
 
 img,
 picture {
-    max-width: 100%;
-    height: auto;
-    width: max-content;
+	max-width: 100%;
+	height: auto;
+	width: max-content;
+	display: block;
+}
+
+body,
+html {
+	/* for display only */
+	height: 100%;
+	width: 100%;
+
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	align-items: center;
+	justify-content: center;
+
+	background-image: linear-gradient(var(--soft-violet), var(--soft-blue));
+	background-repeat: no-repeat;
+
+	font-size: 12px;
+}
+
+h1,
+h2,
+p,
+button {
+	font-family: "Kumbh Sans", sans-serif;
+}
+
+p {
+	font-weight: 400;
 }
 
 .card-container {
-    font-family: 'Kumbh Sans', sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    background-image: linear-gradient(var(--soft-violet), var(--soft-blue));
-    height: 100vh;
-    padding: 2em;
-    color: var(--dark-grayish-blue);
+	color: var(--dark-grayish-blue);
+	padding: 2em;
 }
 
 .img-wrapper {
-    margin-top: -100px;
-    margin-bottom: 30px;
-    background-image: url(images/bg-pattern-mobile.svg);
-    background-repeat: no-repeat;
-    background-position: center bottom;
+	margin-block-start: -9.41em;
+	margin-block-end: 2.5em;
+	margin-inline: auto;
+
+	background-image: url(./images/bg-pattern-mobile.svg);
+	background-repeat: no-repeat;
+	background-position: center bottom;
 }
 
 .image {
-    display: block;
-    margin: 0 auto;
-    position: relative;
-    left: -10px;
-    bottom: 20px;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	left: -1em;
+	bottom: 1.67em;
 }
 
 .card {
-    background-color: #ffffff;
-    border-radius: 1em;
-    padding: 2em;
-    box-shadow: 0.5em 1em 0.5em var(--soft-blue);
-    margin-top: 100px;
+	background-color: #ffffff;
+	border-radius: 2em;
+	padding: 2em;
+	box-shadow: 0.5em 1em 0.5em var(--soft-blue);
+	margin-block-start: 9.41em;
+	margin-inline: auto;
+	max-width: 35.25em;
 }
 
 .card h1 {
-    text-align: center;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--desaturated-blue);
-    margin-bottom: 1em;
+	text-align: center;
+	font-size: 2.8em;
+	font-weight: 700;
+	color: var(--desaturated-blue);
+	margin-block-end: 0.75em;
 }
 
-.faq-container {
-    border-bottom: 1px solid var(--light-grayish-blue);
-    padding: 1em 0em;
+/* Accordion */
+
+.faq-content {
+	margin-inline: auto;
+	margin-block-end: 1em;
+	max-width: 32em;
 }
 
-.question {
-    font-size: 14px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    cursor: pointer;
+.faq-item {
+	border-bottom: 1px solid var(--light-grayish-blue);
+	padding: 1.25em 0em;
 }
 
-.question::after {
-    content: url(images/icon-arrow-down.svg);
+.accordion-trigger {
+	background: none;
+	text-align: left;
+	width: 100%;
+	outline: none;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1em;
 }
 
-.question:hover {
-    cursor: pointer;
-    color: var(--soft-red);
-    font-weight: 400;
+.accordion-trigger .accordion-title {
+	color: initial;
+	font-weight: initial;
 }
 
-.panel {
-    font-size: 12px;
-    line-height: 1.5;
-    margin-top: 1em;
-    display: none;
+.accordion-trigger:focus .accordion-icon {
+	outline: 1px solid var(--dark-grayish-blue);
+	outline-offset: 4px;
 }
 
-.closed {
-    font-weight: 400;
+.accordion-trigger:focus .accordion-title,
+.accordion-trigger:hover .accordion-title {
+	color: var(--soft-red);
+	cursor: pointer;
 }
 
-.open {
-    font-weight: 700;
-    color: var(--desaturated-blue);
+.accordion-trigger:focus {
+	outline: 4px solid transparent;
 }
 
-.question.open::after {
-    content: url(images/icon-arrow-down.svg);
-    transform: rotate(180deg);
+button {
+	border-style: none;
+}
+
+.accordion button::-moz-focus-inner {
+	border: 0;
+}
+
+.accordion-title {
+	display: block;
+	font-size: 14px;
+}
+
+.accordion-icon {
+	content: url(./images/icon-arrow-down.svg);
+	transition: transform 0.5s;
+}
+
+.accordion-trigger[aria-expanded="true"] .accordion-icon {
+	transform: rotate(180deg);
+}
+
+.accordion-trigger[aria-expanded="false"] .accordion-title {
+	font-weight: 400;
+}
+
+.accordion-trigger[aria-expanded="true"] .accordion-title {
+	font-weight: 700;
+}
+
+.accordion-panel {
+	--_accordion-icon-width: 10px;
+	font-size: 12px;
+	line-height: 1.5;
+	margin-block-start: 1em;
+	margin-inline-end: calc(var(--_accordion-icon-width) + 1em);
+}
+
+.accordion-panel[aria-hidden="true"] {
+	display: none;
+}
+
+.accordion-panel[aria-hidden="false"] {
+	display: block;
 }
 
 .attribution {
-    font-size: 11px;
-    text-align: center;
-    padding: 3em;
-    color: var(--desaturated-blue);
-    width: 100%;
+	font-size: 11px;
+	text-align: center;
+	padding: 3em;
+	color: var(--desaturated-blue);
+	width: 100%;
 }
 
 .attribution a {
-    color: var(--desaturated-blue);
+	color: var(--desaturated-blue);
 }
 
-@media screen and (min-width:1440px) {
+@media screen and (min-width: 1024px) {
+	.card-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 
-    .card-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+	.card {
+		padding: 0;
+		max-width: 992px;
 
-    .card {
-        display: flex;
-        flex-direction: row;
-        justify-content: stretch;
-        padding: 0;
-        width: 992px;
-    }
+		display: grid;
+		grid-template-columns: repeat(2, minmax(250px, 1fr));
+		align-items: center;
+	}
 
-    .image-set {
-        display: flex;
-        justify-content: stretch;
-    }
+	.image-set {
+		display: flex;
+		justify-content: stretch;
+		align-items: center;
+		height: 100%;
+		min-width: 0;
+		min-height: 0;
+	}
 
-    .image-set::before {
-        content: url(images/illustration-box-desktop.svg);
-        margin-top:83px;
-        margin-left: -95px;
-        z-index: 1999;
-        align-self: center;
-        position: absolute;
-        width:90px;
-    }
+	.image-set::before {
+		content: url(./images/illustration-box-desktop.svg);
+		margin-top: 6.91em;
+		margin-left: -7.91em;
+		z-index: 12;
+		position: absolute;
+		width: 7.5em;
+	}
 
-    .img-wrapper {
-        background-image: url(images/bg-pattern-desktop.svg);
-        background-size: 140%;
-        background-position: left -180px bottom -60px;
-        padding:0;
-        margin:0;
-        overflow: hidden;
-    }
+	.img-wrapper {
+		background-image: url(./images/bg-pattern-desktop.svg);
+		background-size: 65.41em;
+		background-position-y: center;
+		background-position-x: -32em;
+		padding: 0;
+		height: 100%;
+		overflow: hidden;
+		margin: 0;
 
-    .image {
-        margin:60px 0px 60px -60px;
-        display: block;
-        top:0;
-        left:0;
-        width:468px;
-        height:auto;
-        padding:0;
-    }
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
-    .faq-content {
-        flex-basis: 53%;
-        padding: 73px 80px 100px 85px;
-    }
+	.image {
+		left: -6.67em;
+		bottom: 0;
+	}
 
-    .faq-content h1 {
-        text-align: left;
-    }
+	.faq-content {
+		margin-inline-start: 0;
+		margin-inline-end: 2em;
+		margin-block: 5em;
+		justify-self: start;
+		align-self: center;
+		width: 100%;
+	}
 
-
+	.faq-content h1 {
+		text-align: left;
+	}
 }
